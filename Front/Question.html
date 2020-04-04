@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+    <link type="text/css" rel="stylesheet" href="css\site.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+</head>
+<body onload="loadQuestion()">
+
+    <div id = "div">
+        <h2 id = "name"></h2>
+        <h2 id = "title"></h2>
+        <h1 id = dec></h1>
+        <h3 id = "cm"></h3>
+        <h3 id = "ans"></h3>
+        <h3 id = "time"></h3>
+    </div>
+    <script>
+        function loadQuestion() {
+            var str = window.location.href;
+            var urlAux = str.split("=");
+            var id = urlAux[1]
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5000/api/Question/",
+                crossDomain: true,
+                data : {
+                    QuestionId : id
+                },
+                headers : {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                success: function (response) {
+                    if (response != null){
+                        console.log(id)
+                        console.log(response)
+                        $("#title").append(response.title)
+                        $("#name").append(response.userName)
+                        $("#dec").append(response.description)
+                        $("#cm").append(response.comments.length)
+                        $("#ans").append(response.answers.length)
+                        $("#time").append(response.createTime)
+
+                        // $("#main").html("<ul><li>"+response.message+"</li></ul>");
+                    }
+                    else{
+                        alert(response.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(errorThrown)
+                    console.log(textStatus)
+                    console.log(jqXHR)
+                },
+            });
+
+        }
+    </script>
+</body>
+
+</html>

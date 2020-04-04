@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>مدرسه تکمیلی</title>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css\index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body onload="load()">
+<div id="container">
+    <div id="mytit">
+        <h1><a href="#">پروژه درس مدرسه تکمیلی</a></h1>
+        <h2>مثلا stack over flow</h2>
+
+
+    </div>
+    <div id="menu"> <a href="Index.html">خانه</a> <a href="#">آرشیو</a> <a href="newpost.html">افزودن پست </a> <button><a
+            href="login.html"
+    >ورود به سامانه</a></button></div>
+
+    <div id="content">
+        <div id="left">
+            <div id = "main" class="entry">
+            </div>
+
+        </div>
+        <div id="right">
+            <h2>هوش کسب‌وکار</h2>
+            <p class="intro"> هوشمندی کسب و کار ( Business Intelligence) یا هوش تجاری، مجموعه‌ای از نظریات، روش‌ها، فرایندها، معماری‌ها و فناوری‌هایی است که برای تبدیل داده خام به اطلاعات مفید و معنادار استفاده می‌شود.[۱] هوش کسب و کار مقادیر بزرگی از اطلاعات را برای شناسایی و توسعه فرصت‌های جدید بکار می‌گیرد. بهره بردن از فرصت‌های جدید و اعمال یک استراتژی اثربخش می‌تواند مزیت بازار رقابتی و پایداری بلندمدت به ارمغان بیاورد.</p>
+
+        </div>
+        <div id="footer">
+
+            تهیه شده توسط مهدی و رفقا</a> </div>
+    </div>
+</div>
+<script>
+    function load() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:5000/api/Question/List/",
+            crossDomain: true,
+
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
+            success: function (response) {
+                if (response != null){
+                    let t = '<li id=""></li>';
+                    let main = $("#main");
+                    for (let i =0; i < response.length ; i++){
+                        let t2 = $(t);
+                        t2.html(response[i].title);
+                        t2.attr('id',response[i].id);
+                        t2.on("click",event);
+                        main.append(t2);
+
+                    }
+                    // $("#main").html("<ul><li>"+response.message+"</li></ul>");
+                }
+                else{
+                    alert(response.message);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                console.log(errorThrown)
+                console.log(textStatus)
+                console.log(jqXHR)
+            },
+        });
+    }
+    function event() {
+        var id = $(this).attr("id");
+        window.location = "Question.html?id="+id;
+    }
+</script>
+</body>
+</html>

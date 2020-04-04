@@ -1,0 +1,84 @@
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign up Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- Custom Theme files -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- //Custom Theme files -->
+	<!-- web font -->
+	<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+	<!-- //web font -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		function callbackfunction(result) {
+			// if (result.d) {
+			alert('success');
+			// }
+		}
+		$(document).ready(function () {
+			$("#signin_btn").click(function () {
+				// alert("fuck")
+				var postData = JSON.stringify({
+
+					Email : $("#Email").val(),
+					Password : $("#Password").val(),
+					FirstName : $("#FirstName").val(),
+					LastName : $("#LastName").val()
+				});
+				$.ajax({
+					type: "POST",
+					url: "https://localhost:5001/api/Users/SignUp",
+					crossDomain: true,
+					data: postData,
+					dataType: "json",
+					success: function (response) {
+						if (response.message === "اطلاعات با موفقیت ثبت شد"){
+							localStorage.key=response.data
+							//todo : profile
+							window.location.href = '/untitled/Index.html'
+						}
+						else{
+							alert(response.message);
+						}
+					},
+					error: function () {
+						alert(postData.Email);
+					}
+				});
+			});
+		})
+	</script>
+</head>
+<body>
+<div class="main-w3layouts wrapper">
+	<h1>Sign Up Page</h1>
+	<div class="main-agileinfo">
+		<div class="agileits-top">
+				<input class="text" type="text" id = "FirstName" name="FirstName" placeholder="First name" required="">
+				<input class="text" type="text" id="LastName" name="LastName" placeholder="Last name" required="">
+				<input class="text email" type="email" id="Email" name="Email" placeholder="Email" required="">
+				<input class="text" type="password" id="Password" name="Password" placeholder="Password" required="">
+				<div class="wthree-text">
+					<label class="anim">
+						<input type="checkbox" class="checkbox" required="">
+						<span>I Agree To The Terms & Conditions</span>
+					</label>
+					<div class="clear"> </div>
+				</div>
+			<button id="signin_btn">Sign Up</button>
+			<p>Don't have an Account? <a href="login.html"> Login Now!</a></p>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

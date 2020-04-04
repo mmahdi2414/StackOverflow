@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>افزودن یک پست جدید</title>
+  
+<link type="text/css" rel="stylesheet" href="css/index.css"  />
+<link type="text/css" rel="stylesheet" href="css/newPost.css" />
+<script type="text/javascript" src="nicEdit.js"></script>
+<script type="text/javascript">
+	bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+</script>
+
+
+</head>
+<body>
+<div id="container">
+  <div id="sitetitle">
+    <h1><a href="#">پروژه درس مدرسه تکمیلی</a></h1>
+    <h2>مثلا stack over flow</h2>	
+  </div>
+  <div id="menu"> <a href="index.html">خانه</a> <a href="#">آرشیو</a> <a href="newpost.html">افزودن پست </a> <button><a href="login.html">ورود به سامانه</a></button></div> 
+  
+  <div id="content">
+    <div id="left">
+      <div class="entry">
+        <h2><a href="#">اضافه کردن یک پست جدید</a></h2>
+        <p>
+		<form action="" method="post">
+      
+          <input  placeholder="عنوان پست شما" name="title" style="width:100% ;direction:rtl;margin:5px;"/>
+          <input  placeholder="متن" name="title" style="width:100% ;direction:rtl;margin:5px;"/>
+          
+          <input type="submit" value="ثبت">
+          </form>		
+		</p>
+        <p id="meta">  </p>
+      </div>
+	  
+	  
+    </div>
+
+     <div id="footer" style="margin-top:10px"><a href="https://www.sbu.ac.ir">.کلیه حقوق این سایت متعلق به دانشکده مهندسی و علوم کامپیوتر دانشگاه شهید بهشتی است</a>  </div>
+
+  </div>
+</div>
+	  
+	  <script> 
+	  function myFunction(){
+	var date= new Date();
+var element=document.getElementById("meta");
+element.innerHTML=date;
+}
+ </script>
+	  
+</body>
+</html>
